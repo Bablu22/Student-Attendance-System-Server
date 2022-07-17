@@ -1,6 +1,8 @@
 const express = require("express");
 const PORT = process.env.PORT || 3000;
 const app = express();
+const cors = require("cors");
+app.use(cors());
 app.use(express.json());
 const connectDB = require("./db");
 const routes = require("./routes/index");
@@ -21,8 +23,8 @@ app.get("/", (req, res) => {
 
 // Global error handle
 app.use((err, _req, res, _next) => {
-  console.log(err);
-  res.status(500).json({ message: "Server Error Occured" });
+  const message = err.message ? err.message : "Server Error Occured";
+  res.status(500).json({ message: message });
 });
 
 // connect mongoose

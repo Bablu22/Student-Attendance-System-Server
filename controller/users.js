@@ -1,15 +1,14 @@
 const usersService = require("../service/user");
 const authService = require("../service/auth");
 const error = require("../utils/error");
+const User = require("../models/user");
 
 const getUser = async (req, res, next) => {
   try {
     const user = await usersService.findUsers();
     return res.status(200).json(user);
-  } catch {
-    (e) => {
-      next(e);
-    };
+  } catch (e) {
+    next(e);
   }
 };
 
@@ -17,15 +16,12 @@ const getUserById = async (req, res, next) => {
   const { id } = req.params;
   try {
     const user = await usersService.findByProperty("_id", id);
-    console.log(user);
     if (!user) {
       throw error("User not found", 404);
     }
     return res.status(200).json(user);
-  } catch {
-    (e) => {
-      next(e);
-    };
+  } catch (e) {
+    next(e);
   }
 };
 
@@ -41,10 +37,8 @@ const postUser = async (req, res, next) => {
       accountStatus,
     });
     return res.ststus(202).json(user);
-  } catch {
-    (e) => {
-      next(e);
-    };
+  } catch (e) {
+    next(e);
   }
 };
 

@@ -15,10 +15,8 @@ async function authenticate(req, res, next) {
     }
     req.user = user;
     next();
-  } catch {
-    (e) => {
-      next(e);
-    };
+  } catch (e) {
+    next(e);
   }
 }
 
