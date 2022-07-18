@@ -1,16 +1,20 @@
 const mongoose = require("mongoose");
 
-const studentAttendenceSchema = new mongoose.Schema({
-  createdAt: Date,
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+const studentAttendenceSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    adminAttendence: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "adminAttendence",
+      required: true,
+    },
   },
-  adminAttendence: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "adminAttendence",
-  },
-});
+  { timestamps: true }
+);
 
 const studentAttendence = mongoose.model(
   "studentAttendence",
